@@ -1,5 +1,5 @@
 {% set name = "ada-py" %}
-{% set version = "0.2.16" %}
+{% set version = "0.2.17" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/Krande/adapy/archive/v{{ version }}.tar.gz
-  sha256: 94734053ad2e397c198e08babb252bd7037945bd3f40b9a1f1d3320b61526da6
+  sha256: 5c5bc866f2cfd4014c880ce6ad7aa18a565f3962f0c12d330a61b3913694004c
 
 build:
   noarch: python
