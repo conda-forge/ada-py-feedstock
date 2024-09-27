@@ -44,19 +44,20 @@ requirements:
     - pyparsing
     - pyglfw
     - pygfx
+    - python-flatbuffers
 
 test:
   source_files:
     - tests
     - files
-    - examples
   requires:
     - pytest
     - pytest-cov
+    - pytest-asyncio
   imports:
     - ada
   commands:
-    - pytest tests --ignore=tests/fem --cov=ada --cov-report=xml
+    - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --cov=ada --cov-report=xml
 
 about:
   home: https://github.com/krande/adapy
