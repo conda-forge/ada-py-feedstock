@@ -1,5 +1,5 @@
 {% set name = "ada-py" %}
-{% set version = "0.3.1" %}
+{% set version = "0.3.2" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/Krande/adapy/archive/v{{ version }}.tar.gz
-  sha256: 5ee57d7f0a2cfda0360bd16a71a653055f9a60edac31b0eb40a061a5cc3f6ed0
+  sha256: 62eb9fbe8e189f2f74e78c3ef6498fc7db3c305690735939dc27ec13ba336a9f
 
 build:
   noarch: python
@@ -28,6 +28,7 @@ requirements:
     - hdf5
     - h5py
     - ifcopenshell
+    - bcf-client
     - pythonocc-core
     - python-gmsh
     - pyquaternion
