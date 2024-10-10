@@ -28,6 +28,7 @@ requirements:
     - hdf5
     - h5py
     - ifcopenshell
+    - bcf-client
     - pythonocc-core
     - python-gmsh
     - pyquaternion
