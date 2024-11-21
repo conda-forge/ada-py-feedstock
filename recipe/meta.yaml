@@ -53,6 +53,7 @@ test:
     - tests
     - files
   requires:
+    - python {{ python_min }}
     - pytest
     - pytest-cov
     - pytest-asyncio
