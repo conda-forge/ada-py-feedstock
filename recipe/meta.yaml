@@ -1,5 +1,6 @@
 {% set name = "ada-py" %}
 {% set version = "0.3.4" %}
+{% set python_min = "3.10" %}
 
 package:
   name: {{ name }}
@@ -20,9 +21,9 @@ requirements:
   host:
     - pip
     - setuptools
-    - python >=3.10
+    - python {{ python_min }}
   run:
-    - python >=3.10
+    - python >={{ python_min }}
     - kaleido-core 0.1.0
     - numpy
     - hdf5
