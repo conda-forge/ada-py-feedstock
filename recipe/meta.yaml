@@ -9,6 +9,8 @@ package:
 source:
   url: https://github.com/Krande/adapy/archive/v{{ version }}.tar.gz
   sha256: a234ca625467cfc6184f42efebbb099b72a29a771d5668fc15e56d9188440336
+  patches:
+    - patches/remove_warning_filter.patch
 
 build:
   noarch: python
