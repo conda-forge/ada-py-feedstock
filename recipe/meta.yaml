@@ -1,5 +1,5 @@
 {% set name = "ada-py" %}
-{% set version = "0.4.1" %}
+{% set version = "0.4.2" %}
 {% set python_min = "3.11" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/Krande/adapy/archive/v{{ version }}.tar.gz
-  sha256: e77a94c0c35f5fc22c14448b598ee79aae1aa1082cd88d4c916aae69de57cdf4
+  sha256: b1aa9a6622bfc205cc7a6e1c4a71c218a0c10e50bfbd4c986c89927e16ff13f2
 
 build:
   noarch: python
