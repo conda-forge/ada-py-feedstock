@@ -1,5 +1,5 @@
 {% set name = "ada-py" %}
-{% set version = "0.4.2" %}
+{% set version = "0.4.3" %}
 {% set python_min = "3.11" %}
 
 package:
@@ -8,12 +8,12 @@ package:
 
 source:
   url: https://github.com/Krande/adapy/archive/v{{ version }}.tar.gz
-  sha256: b1aa9a6622bfc205cc7a6e1c4a71c218a0c10e50bfbd4c986c89927e16ff13f2
+  sha256: 972eb44fe1c3f508fd7a01818ac5f2d384d3055cc823a031bdf36a58706577ad
 
 build:
   noarch: python
   script: python -m pip install . --no-deps -vv
-  number: 1
+  number: 0
   entry_points:
     - ada-viewer=ada.visit.websocket_cli:ws_cli_app
 
