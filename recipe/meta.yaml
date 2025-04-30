@@ -1,5 +1,5 @@
 {% set name = "ada-py" %}
-{% set version = "0.4.4" %}
+{% set version = "0.5.0" %}
 {% set python_min = "3.11" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/Krande/adapy/archive/v{{ version }}.tar.gz
-  sha256: 475265bb7cb9eff72f72b8faa6d826e41be467d97ef2eaf515e721256e55e724
+  sha256: 7b6a0019b0aa1cfddbfec1279cd0f0b7a18f86fd32a4d10e62dba58ba919ee72
 
 build:
   noarch: python
@@ -40,7 +40,6 @@ requirements:
     - websockets
     - plotly
     - python-kaleido
-    - calculix
     - ipywidgets
     - jupyterlab
     - pyparsing
@@ -57,6 +56,7 @@ test:
     - pytest
     - pytest-cov
     - pytest-asyncio
+    - calculix
   imports:
     - ada
   commands:
