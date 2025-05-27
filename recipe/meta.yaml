@@ -40,6 +40,7 @@ requirements:
     - websockets
     - plotly
     - python-kaleido
+    - pydantic
     - ipywidgets
     - jupyterlab
     - pyparsing
