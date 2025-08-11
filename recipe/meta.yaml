@@ -24,7 +24,6 @@ requirements:
     - python {{ python_min }}
   run:
     - python >={{ python_min }}
-    - kaleido-core 0.1.0
     - numpy
     - hdf5
     - h5py
@@ -39,7 +38,8 @@ requirements:
     - meshio
     - websockets
     - plotly
-    - python-kaleido
+    - python-kaleido 0.1.0
+    - kaleido-core 0.1.0
     - pydantic
     - ipywidgets
     - jupyterlab
