@@ -38,8 +38,7 @@ requirements:
     - meshio
     - websockets
     - plotly
-    - python-kaleido 0.1.0
-    - kaleido-core 0.1.0
+    - python-kaleido
     - pydantic
     - ipywidgets
     - jupyterlab
