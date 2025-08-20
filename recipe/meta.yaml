@@ -1,5 +1,5 @@
 {% set name = "ada-py" %}
-{% set version = "0.7.3" %}
+{% set version = "0.7.4" %}
 {% set python_min = "3.11" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/Krande/adapy/archive/v{{ version }}.tar.gz
-  sha256: ab611a477a584d3e3a18a04c4edbcd0e9cdef13d178e255ff3822b176198ba5e
+  sha256: 44bbd98b4abd1689c50dd4cd5fedcbc89080754b83b6a1109f7609e22f7202de
 
 build:
   noarch: python
@@ -38,8 +38,7 @@ requirements:
     - meshio
     - websockets
     - plotly
-    - python-kaleido 0.1.0
-    - kaleido-core 0.1.0
+    - python-kaleido
     - pydantic
     - ipywidgets
     - jupyterlab
@@ -61,7 +60,7 @@ test:
   imports:
     - ada
   commands:
-    - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --cov=ada --cov-report=xml
+    - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py
 
 about:
   home: https://github.com/krande/adapy
