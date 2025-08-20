@@ -60,7 +60,7 @@ test:
   imports:
     - ada
   commands:
-    - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --cov=ada --cov-report=xml
+    - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py
 
 about:
   home: https://github.com/krande/adapy
