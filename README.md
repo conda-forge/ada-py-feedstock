@@ -3,6 +3,10 @@ About ada-py-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ada-py-feedstock/blob/main/LICENSE.txt)
 
+
+About ada-py
+------------
+
 Home: https://github.com/krande/adapy
 
 Package license: GPL-3.0-or-later
@@ -10,6 +14,19 @@ Package license: GPL-3.0-or-later
 Summary: A python library for structural analysis and design
 
 Documentation: https://krande.github.io/adapy/
+
+About ada-py-core
+-----------------
+
+Home: https://github.com/krande/adapy
+
+Package license: GPL-3.0-or-later
+
+Summary: A python library for structural analysis and design
+
+Documentation: https://krande.github.io/adapy/
+
+The core package without dependencies of ADAPY, a python library for structural analysis and design.
 
 Current build status
 ====================
@@ -30,6 +47,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-ada--py-green.svg)](https://anaconda.org/conda-forge/ada-py) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ada-py.svg)](https://anaconda.org/conda-forge/ada-py) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ada-py.svg)](https://anaconda.org/conda-forge/ada-py) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ada-py.svg)](https://anaconda.org/conda-forge/ada-py) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-ada--py--core-green.svg)](https://anaconda.org/conda-forge/ada-py-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ada-py-core.svg)](https://anaconda.org/conda-forge/ada-py-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ada-py-core.svg)](https://anaconda.org/conda-forge/ada-py-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ada-py-core.svg)](https://anaconda.org/conda-forge/ada-py-core) |
 
 Installing ada-py
 =================
@@ -41,16 +59,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `ada-py` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `ada-py, ada-py-core` can be installed with `conda`:
 
 ```
-conda install ada-py
+conda install ada-py ada-py-core
 ```
 
 or with `mamba`:
 
 ```
-mamba install ada-py
+mamba install ada-py ada-py-core
 ```
 
 It is possible to list all of the versions of `ada-py` available on your platform with `conda`:
