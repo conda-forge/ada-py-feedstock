@@ -25,7 +25,7 @@ requirements:
   host:
     - pip
     - setuptools
-    - python 3.11.*
+    - python ${{ python_min }}.*
   run:
     - python >=${{ python_min }}
     - numpy
