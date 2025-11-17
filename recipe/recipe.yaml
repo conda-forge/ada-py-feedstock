@@ -5,6 +5,10 @@ context:
   version: 0.7.8
   python_min: 3.11
 
+recipe:
+  name: ${{ name }}
+  version: ${{ version }}
+
 source:
   url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
   sha256: 64f06aab40be022219f66fc1a0d624eb74dccc8563e91791b837c8de73678c49
@@ -15,7 +19,6 @@ build:
 outputs:
   - package:
       name: ${{ name }}-core
-      version: ${{ version }}
     build:
       noarch: python
       script: python -m pip install . --no-deps -vv
@@ -33,7 +36,6 @@ outputs:
 
   - package:
       name: ${{ name }}
-      version: ${{ version }}
     build:
       noarch: python
 
