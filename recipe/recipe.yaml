@@ -5,71 +5,83 @@ context:
   version: 0.7.8
   python_min: 3.11
 
-package:
-  name: ${{ name }}
-  version: ${{ version }}
-
 source:
   url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
   sha256: 64f06aab40be022219f66fc1a0d624eb74dccc8563e91791b837c8de73678c49
 
 build:
   number: 1
-  noarch: python
-  script: python -m pip install . --no-deps -vv
-  python:
-    entry_points:
-      - ada-viewer=ada.visit.websocket_cli:ws_cli_app
 
-requirements:
-  host:
-    - pip
-    - setuptools
-    - python ${{ python_min }}.*
-  run:
-    - python >=${{ python_min }}
-    - numpy
-    - hdf5
-    - h5py
-    - ifcopenshell
-    - bcf-client
-    - pythonocc-core
-    - python-gmsh
-    - pyquaternion
-    - trimesh
-    - occt >=7.7.2
-    - send2trash
-    - meshio
-    - websockets
-    - plotly
-    - python-kaleido
-    - pydantic
-    - ipywidgets
-    - jupyterlab
-    - pyparsing
-    - pyglfw
-    - pygfx
-    - python-flatbuffers
+outputs:
+  - package:
+      name: ${{ name }}-core
+      version: ${{ version }}
+    build:
+      noarch: python
+      script: python -m pip install . --no-deps -vv
+      python:
+        entry_points:
+          - ada-viewer=ada.visit.websocket_cli:ws_cli_app
+    requirements:
+      host:
+        - pip
+        - setuptools
+        - python ${{ python_min }}.*
+    about:
+      description: |
+        The core package without dependencies of ADAPY, a python library for structural analysis and design.
 
-tests:
-  - python:
-      imports:
-        - ada
-      pip_check: false
-      python_version: ${{ python_min }}.*
-  - files:
-      source:
-        - tests
-        - files
+  - package:
+      name: ${{ name }}
+      version: ${{ version }}
+    build:
+      noarch: python
+
     requirements:
       run:
-        - python ${{ python_min }}.*
-        - pytest
-        - pytest-cov
-        - pytest-asyncio
-        - calculix
-    script:
-      - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py
+        - python >=${{ python_min }}
+        - numpy
+        - hdf5
+        - h5py
+        - ifcopenshell
+        - bcf-client
+        - pythonocc-core
+        - python-gmsh
+        - pyquaternion
+        - trimesh
+        - occt >=7.7.2
+        - send2trash
+        - meshio
+        - websockets
+        - plotly
+        - python-kaleido
+        - pydantic
+        - ipywidgets
+        - jupyterlab
+        - pyparsing
+        - pyglfw
+        - pygfx
+        - python-flatbuffers
+        - ${{ pin_subpackage("ada-py-core", exact=True) }}
+    tests:
+      - python:
+          imports:
+            - ada
+          pip_check: false
+          python_version: ${{ python_min }}.*
+      - files:
+          source:
+            - tests
+            - files
+        requirements:
+          run:
+            - python ${{ python_min }}.*
+            - pytest
+            - pytest-cov
+            - pytest-asyncio
+            - calculix
+        script:
+          - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py
 
 about:
   license: GPL-3.0-or-later
