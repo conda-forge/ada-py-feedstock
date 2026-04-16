@@ -12,6 +12,8 @@ recipe:
 source:
   url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
   sha256: b6eaa451fdac26d6e2d2bb98b1d1fa78b0b5a891f73a5472c57e18e6fd2bbf68
+  patches:
+    - patches/fix_header_handling_for_ifcopenshell_0_8_4_compatibility.patch
 
 build:
   number: 0
