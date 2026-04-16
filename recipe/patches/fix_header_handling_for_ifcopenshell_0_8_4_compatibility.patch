@@ -1,0 +1,40 @@
+Subject: [PATCH] chore: fix header handling for ifcopenshell 0.8.4 compatibility
+---
+Index: src/ada/cadit/ifc/utils.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ada/cadit/ifc/utils.py b/src/ada/cadit/ifc/utils.py
+--- a/src/ada/cadit/ifc/utils.py	(revision ac5e50a83b131401e0bc3cf5046b2574177e3d18)
++++ b/src/ada/cadit/ifc/utils.py	(date 1776360403129)
+@@ -135,6 +135,8 @@
+ 
+ 
+ def assembly_to_ifc_file(a: "Assembly"):
++    import types
++
+     schema = a.metadata["schema"]
+     f = ifcopenshell.api.run("project.create_file", version=schema)
+     project = ifcopenshell.api.run("root.create_entity", f, ifc_class="IfcProject", name=a.metadata["project"])
+@@ -159,8 +161,18 @@
+     ifcopenshell.api.run(
+         "context.add_context", f, context_type="Model", context_identifier="Body", target_view="MODEL_VIEW"
+     )
+-    f.wrapped_data.header.file_name.author = ("AdaUser",)
+-    f.wrapped_data.header.file_name.organization = ("AdaOrg",)
++
++    header = f.wrapped_data.header
++    if isinstance(header, types.MethodType):
++        # check if f.wrapped_data.header is a function (changed to function in 0.8.4)
++        from ifcopenshell.file import file_header
++
++        header = file_header(f, f.wrapped_data.header())
++    else:
++        header = f.wrapped_data.header
++
++    header.file_name.author = ("AdaUser",)
++
+     return f
+ 
+ 
