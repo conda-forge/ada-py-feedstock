@@ -30,6 +30,8 @@ outputs:
         - pip
         - setuptools
         - python ${{ python_min }}.*
+      run:
+        - python >=${{ python_min }}
     about:
       description: |
         The core package without dependencies of ADAPY, a python library for structural analysis and design.
