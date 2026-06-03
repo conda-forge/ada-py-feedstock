@@ -12,8 +12,6 @@ recipe:
 source:
   url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
   sha256: 7322ea2b9dd52946a47ee678e16954fdaede3c11f9d663c2c5fcde365b534f87
-  patches:
-    - patches/fix_header_handling_for_ifcopenshell_0_8_4_compatibility.patch
 
 build:
   number: 0
@@ -26,7 +24,7 @@ outputs:
       script: python -m pip install . --no-deps -vv
       python:
         entry_points:
-          - ada-viewer=ada.visit.websocket_cli:ws_cli_app
+          - ada=ada_cli.main:main
     requirements:
       host:
         - pip
