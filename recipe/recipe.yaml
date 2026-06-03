@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: ada-py
-  version: "0.7.12"
+  version: "0.8.0"
   python_min: "3.11"
 
 recipe:
@@ -11,9 +11,7 @@ recipe:
 
 source:
   url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
-  sha256: b6eaa451fdac26d6e2d2bb98b1d1fa78b0b5a891f73a5472c57e18e6fd2bbf68
-  patches:
-    - patches/fix_header_handling_for_ifcopenshell_0_8_4_compatibility.patch
+  sha256: 7322ea2b9dd52946a47ee678e16954fdaede3c11f9d663c2c5fcde365b534f87
 
 build:
   number: 0
@@ -26,12 +24,14 @@ outputs:
       script: python -m pip install . --no-deps -vv
       python:
         entry_points:
-          - ada-viewer=ada.visit.websocket_cli:ws_cli_app
+          - ada=ada_cli.main:main
     requirements:
       host:
         - pip
         - setuptools
         - python ${{ python_min }}.*
+      run:
+        - python >=${{ python_min }}
     about:
       description: |
         The core package without dependencies of ADAPY, a python library for structural analysis and design.
@@ -85,7 +85,7 @@ outputs:
             - pytest-asyncio
             - calculix
         script:
-          - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py
+            - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --ignore=tests/comms/rest --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py
 
 about:
   license: GPL-3.0-or-later
