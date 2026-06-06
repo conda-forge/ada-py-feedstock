@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: ada-py
-  version: "0.12.0"
+  version: "0.13.0"
   python_min: "3.11"
 
 recipe:
@@ -11,7 +11,7 @@ recipe:
 
 source:
   url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
-  sha256: 1ad36faf8e6e438f0f49b2d23c5897f6590fa2e93ef48993565b22500f0e01cb
+  sha256: 226c640408a8895a9c1cbfef6af3c26dcc9d10959f63709b9da42d9d7812c7fe
 
 build:
   number: 0
@@ -85,7 +85,7 @@ outputs:
             - pytest-asyncio
             - calculix
         script:
-            - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --ignore=tests/comms/rest --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py
+          - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --ignore=tests/comms/rest --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py
 
 about:
   license: GPL-3.0-or-later
