@@ -5,7 +5,7 @@
 
 [workspace]
 name = "ada-py-feedstock"
-version = "2026.5.29"  # conda-smithy version used to generate this file
+version = "2026.6.14"  # conda-smithy version used to generate this file
 description = "Pixi configuration for conda-forge/ada-py-feedstock"
 authors = ["@conda-forge/ada-py"]
 channels = ["conda-forge"]
