@@ -84,6 +84,11 @@ outputs:
             - pytest-cov
             - pytest-asyncio
             - calculix
+            - libgl-devel
+            - mesalib
+            - xorg-libxdamage
+            - xorg-libxxf86vm
+            - xorg-libxext
         script:
           # test_no_call_site_reimplements_the_env_parse greps the upstream src/ tree, which is not
           # part of the test files copied here; it is a repo lint, not a package test.
