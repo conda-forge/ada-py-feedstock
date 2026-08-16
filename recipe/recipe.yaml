@@ -56,7 +56,7 @@ outputs:
         # internals (_data_append, the buffer_postprocessor bufferView
         # insertion-order contract), which the 5.0 major bump breaks. Upstream
         # locks/tests against 4.12.2; cap below 5 until adapy migrates.
-        - trimesh >=4.12,<5
+        - trimesh >=5
         - occt >=7.7.2
         - send2trash
         - meshio
