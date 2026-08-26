@@ -14,7 +14,7 @@ source:
   sha256: 70f84cd69c2fa5c669bfcdb35cac58d9256d30d733e467e3cb4f8575a8fa167a
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
@@ -35,6 +35,9 @@ outputs:
     about:
       description: |
         The core package without dependencies of ADAPY, a python library for structural analysis and design.
+
+        This output ships the `ada` command-line entry point; most of its
+        subcommands need the full `ada-py` package to be installed as well.
 
   - package:
       name: ${{ name }}
@@ -103,7 +106,17 @@ outputs:
 about:
   license: GPL-3.0-or-later
   license_file: LICENSE
-  summary: A python library for structural analysis and design
+  summary: A python library for structural analysis and design, plus the `ada` command-line tool
+  description: |
+    ADAPY is a python library for structural analysis and design. It reads and
+    writes common CAD and FEM formats and can build, visualise and run analyses
+    on structural models.
+
+    Installing this package also provides the `ada` command-line tool. Run
+    `ada --help` for the full list of subcommands; these include `ada convert`
+    (convert between supported CAD/FEM formats), `ada view` (open a model in
+    the built-in web viewer) and `ada serve` (run the REST API or worker
+    process).
   homepage: https://github.com/krande/adapy
   documentation: https://krande.github.io/adapy/
 
