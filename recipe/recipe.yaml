@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: ada-py
-  version: "0.80.0"
+  version: "0.83.0"
   python_min: "3.11"
 
 recipe:
@@ -11,7 +11,7 @@ recipe:
 
 source:
   url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
-  sha256: 585554a6f981856ff003ec5f9e340dd624abcf155d89677e08a709cb6b0f0d22
+  sha256: a9e5722a7a514fc8231ddd940475211a5ad4206996f47d441d7467df8e6927cb
 
 build:
   number: 0
@@ -120,10 +120,8 @@ outputs:
           # silently finds nothing instead of erroring; also a repo lint, not a package test.
           # test_committed_frontend_fixture_is_current imports tools/gen_beam_solids_compact_fixture.py,
           # which lives outside the tests/ and files/ trees copied here.
-          - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --ignore=tests/comms/rest --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py --deselect
-            tests/core/cad/test_tess_env_defaults.py::test_no_call_site_reimplements_the_env_parse --deselect
-            tests/core/assets/test_layering_gate.py::test_the_gate_can_actually_fail --deselect
-            tests/core/fem/results/test_beam_compact.py::test_committed_frontend_fixture_is_current
+          - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --ignore=tests/comms/rest --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py --deselect 
+            tests/core/cad/test_tess_env_defaults.py::test_no_call_site_reimplements_the_env_parse --deselect tests/core/assets/test_layering_gate.py::test_the_gate_can_actually_fail --deselect tests/core/fem/results/test_beam_compact.py::test_committed_frontend_fixture_is_current
 
 about:
   license: GPL-3.0-or-later
