@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: ada-py
-  version: "0.75.1"
+  version: "0.80.0"
   python_min: "3.11"
 
 recipe:
@@ -11,7 +11,7 @@ recipe:
 
 source:
   url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
-  sha256: 62fc4d95050ba60c29d04f1fc0d195e3569d4b34f8c6170c286ac9c67a3b1620
+  sha256: 585554a6f981856ff003ec5f9e340dd624abcf155d89677e08a709cb6b0f0d22
 
 build:
   number: 0
@@ -52,7 +52,20 @@ outputs:
         - h5py
         - ifcopenshell
         - bcf-client
-        - pythonocc-core
+        # The CAD kernel. ada-cpp rather than pythonocc-core, because the geometry
+        # layer's own path through it is the native one: ada.cad's backend registry
+        # prefers ada-cpp when both are present, and the tessellation, STEP/IFC and
+        # topology verbs it exposes are what adapy calls.
+        #
+        # This is also what lets the closure move to OCCT 8: pythonocc-core's newest
+        # build is 7.9.3 and pins occt ==7.9.3, so requiring it holds every consumer
+        # of ada-py on the 7.9 line regardless of what they themselves need.
+        #
+        # pythonocc-core is NOT gone, only un-required. `ada.occ` is unchanged and
+        # ADAPY_CAD_BACKEND=occ still selects it; installing pythonocc-core alongside
+        # is supported and is how anything reaching for an OCC capability ada-cpp does
+        # not cover yet -- curved-face imprint is the live one -- keeps working.
+        - ada-cpp
         - python-gmsh
         - pyquaternion
         # ada.api.animations / scene_converter build on trimesh's private glTF
@@ -60,7 +73,9 @@ outputs:
         # insertion-order contract), which the 5.0 major bump breaks. Upstream
         # locks/tests against 4.12.2; cap below 5 until adapy migrates.
         - trimesh >=5
-        - occt >=7.7.2
+        # No direct occt entry: it arrived with pythonocc-core and adapy links nothing
+        # against it itself. ada-cpp carries the version it was built for, which is the
+        # only one that can be right.
         - send2trash
         - meshio
         - websockets
@@ -100,8 +115,15 @@ outputs:
         script:
           # test_no_call_site_reimplements_the_env_parse greps the upstream src/ tree, which is not
           # part of the test files copied here; it is a repo lint, not a package test.
-          - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --ignore=tests/comms/rest --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py --deselect 
-            tests/core/cad/test_tess_env_defaults.py::test_no_call_site_reimplements_the_env_parse
+          # test_the_gate_can_actually_fail uses `git grep` to prove the fixture-provider tokens
+          # are findable in tests/ -- the copied test-files tree here has no .git, so git grep
+          # silently finds nothing instead of erroring; also a repo lint, not a package test.
+          # test_committed_frontend_fixture_is_current imports tools/gen_beam_solids_compact_fixture.py,
+          # which lives outside the tests/ and files/ trees copied here.
+          - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --ignore=tests/comms/rest --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py --deselect
+            tests/core/cad/test_tess_env_defaults.py::test_no_call_site_reimplements_the_env_parse --deselect
+            tests/core/assets/test_layering_gate.py::test_the_gate_can_actually_fail --deselect
+            tests/core/fem/results/test_beam_compact.py::test_committed_frontend_fixture_is_current
 
 about:
   license: GPL-3.0-or-later
