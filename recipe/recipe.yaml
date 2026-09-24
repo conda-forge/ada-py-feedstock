@@ -115,13 +115,16 @@ outputs:
         script:
           # test_no_call_site_reimplements_the_env_parse greps the upstream src/ tree, which is not
           # part of the test files copied here; it is a repo lint, not a package test.
-          # test_the_gate_can_actually_fail uses `git grep` to prove the fixture-provider tokens
-          # are findable in tests/ -- the copied test-files tree here has no .git, so git grep
-          # silently finds nothing instead of erroring; also a repo lint, not a package test.
+          # test_the_gate_can_actually_fail (assets layering gate AND clash vocabulary gate) uses
+          # `git grep` to prove the forbidden tokens are findable -- the copied test-files tree
+          # here has no .git of its own, so git grep searches the feedstock checkout around it and
+          # silently finds nothing instead of erroring; a repo lint, not a package test. Both
+          # gates read the installed package instead from the next adapy release, and these two
+          # deselects can go then.
           # test_committed_frontend_fixture_is_current imports tools/gen_beam_solids_compact_fixture.py,
           # which lives outside the tests/ and files/ trees copied here.
           - pytest tests --ignore=tests/fem --ignore=tests/profiling --ignore=tests/examples --ignore=tests/full/frontend --ignore=tests/comms/rest --cov=ada --cov-report=xml --ignore=tests/core/visit/plotting/test_easy_plotly.py --deselect 
-            tests/core/cad/test_tess_env_defaults.py::test_no_call_site_reimplements_the_env_parse --deselect tests/core/assets/test_layering_gate.py::test_the_gate_can_actually_fail --deselect tests/core/fem/results/test_beam_compact.py::test_committed_frontend_fixture_is_current
+            tests/core/cad/test_tess_env_defaults.py::test_no_call_site_reimplements_the_env_parse --deselect tests/core/assets/test_layering_gate.py::test_the_gate_can_actually_fail --deselect tests/core/clash/test_vocabulary_gate.py::test_the_gate_can_actually_fail --deselect tests/core/fem/results/test_beam_compact.py::test_committed_frontend_fixture_is_current
 
 about:
   license: GPL-3.0-or-later
