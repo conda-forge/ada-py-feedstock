@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: ada-py
-  version: "0.102.0"
+  version: "0.103.0"
   python_min: "3.11"
 
 recipe:
@@ -11,7 +11,7 @@ recipe:
 
 source:
   url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
-  sha256: 930a1a0eb549fa1b91307ca43a7cb97d29a74772e79dfc282a48c33bf5f18e93
+  sha256: 7c29a30c75a2ea045c5b8f577bdf4b88870658cbb944620ac1c4e4d9f712de8f
 
 build:
   number: 0
@@ -34,7 +34,7 @@ outputs:
         - python >=${{ python_min }}
     about:
       description: |
-        The core package without dependencies of ADAPY, a python library for structural analysis and design.
+        The core package without dependencies of ADAPY (ADA, Advanced Design & Analysis), a python library for structural analysis and design.
 
         This output ships the `ada` command-line entry point; most of its
         subcommands need the full `ada-py` package to be installed as well.
@@ -148,17 +148,17 @@ outputs:
 about:
   license: GPL-3.0-or-later
   license_file: LICENSE
-  summary: A python library for structural analysis and design, plus the `ada` command-line tool
+  summary: ADA (Advanced Design & Analysis) - a python library for structural analysis and design, plus the `ada` command-line tool
   description: |
-    ADAPY is a python library for structural analysis and design. It reads and
-    writes common CAD and FEM formats and can build, visualise and run analyses
-    on structural models.
+    ADAPY (ADA, Advanced Design & Analysis) is a python library for structural
+    analysis and design. It reads and writes common CAD and FEM formats and can
+    build, visualise and run analyses on structural models.
 
     Installing this package also provides the `ada` command-line tool. Run
     `ada --help` for the full list of subcommands; these include `ada convert`
     (convert between supported CAD/FEM formats), `ada view` (open a model in
-    the built-in web viewer) and `ada serve` (run the REST API or worker
-    process).
+    Ada Studio, the built-in web app) and `ada serve` (run the REST API or
+    worker process).
   homepage: https://github.com/krande/adapy
   documentation: https://krande.github.io/adapy/
 
