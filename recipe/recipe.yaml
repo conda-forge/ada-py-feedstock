@@ -21,6 +21,10 @@ outputs:
       name: ${{ name }}-core
     build:
       noarch: python
+      # The noarch outputs are built once, on linux. The Windows job exists only
+      # for the -desktop output; building these there too would upload the same
+      # noarch files twice.
+      skip: win
       script: python -m pip install . --no-deps -vv
       python:
         entry_points:
@@ -43,6 +47,7 @@ outputs:
       name: ${{ name }}
     build:
       noarch: python
+      skip: win
       # The `ada` console script, declared here as well as on `ada-py-core`, so that
       # installing only the metapackage gets you the CLI.
       #
@@ -145,6 +150,53 @@ outputs:
             tests/core/cad/test_tess_env_defaults.py::test_no_call_site_reimplements_the_env_parse --deselect tests/core/assets/test_layering_gate.py::test_the_gate_can_actually_fail --deselect tests/core/clash/test_vocabulary_gate.py::test_the_gate_can_actually_fail --deselect 
             tests/core/fem/results/test_beam_compact.py::test_committed_frontend_fixture_is_current
 
+  # The desktop window for Ada Studio: a small native shell (Tauri, using the
+  # system WebView2) that `ada desktop` launches against the local viewer server
+  # it starts from this same environment. It embeds no frontend -- the viewer
+  # bundle already ships in ada-py -- and links nothing from Python, so it is a
+  # plain platform binary next to the noarch packages above. Windows only for now.
+  - package:
+      name: ${{ name }}-desktop
+    build:
+      skip: not win
+      script:
+        file: build-desktop
+      dynamic_linking:
+        # A Windows API set DLL (WebView2 / WinRT error reporting): part of the OS,
+        # never a conda package. rattler-build's own system list doesn't cover it,
+        # and error_overlinking would otherwise fail the build on it.
+        missing_dso_allowlist:
+          - "**/api-ms-win-core-winrt-*.dll"
+    requirements:
+      build:
+        - ${{ compiler('rust') }}
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - cargo-bundle-licenses
+      run:
+        # Not pin_subpackage: ada-py is built on the linux job, not alongside this one.
+        # `ada desktop` (in ada-py) and this binary are released together.
+        - ada-py ==${{ version }}
+    tests:
+      # A contents check, not `ada-desktop --version`: a script test installs the run
+      # dependencies, and ada-py at this exact version is built by the linux job of
+      # the same run, so it is not on the channel yet when this job tests.
+      - package_contents:
+          bin:
+            - ada-desktop
+    about:
+      summary: Desktop window for Ada Studio, launched with `ada desktop`
+      description: |
+        A native desktop window for Ada Studio, the web app that ships with ada-py.
+        `ada desktop` starts the local viewer server from the installed ada-py and
+        opens it in this window, with native pop-out windows, remembered window
+        positions and a native 3D mouse reader. Requires the Microsoft Edge WebView2
+        runtime, which ships with current Windows.
+      license: GPL-3.0-or-later
+      license_file:
+        - LICENSE
+        - THIRDPARTY.yml
+
 about:
   license: GPL-3.0-or-later
   license_file: LICENSE
@@ -163,5 +215,6 @@ about:
   documentation: https://krande.github.io/adapy/
 
 extra:
+  feedstock-name: ada-py
   recipe-maintainers:
     - Krande

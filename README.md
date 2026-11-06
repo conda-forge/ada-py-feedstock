@@ -41,12 +41,29 @@ The core package without dependencies of ADAPY (ADA, Advanced Design & Analysis)
 This output ships the `ada` command-line entry point; most of its
 subcommands need the full `ada-py` package to be installed as well.
 
+About ada-py-desktop
+--------------------
+
+Home: https://github.com/krande/adapy
+
+Package license: GPL-3.0-or-later
+
+Summary: Desktop window for Ada Studio, launched with `ada desktop`
+
+Documentation: https://krande.github.io/adapy/
+
+A native desktop window for Ada Studio, the web app that ships with ada-py.
+`ada desktop` starts the local viewer server from the installed ada-py and
+opens it in this window, with native pop-out windows, remembered window
+positions and a native 3D mouse reader. Requires the Microsoft Edge WebView2
+runtime, which ships with current Windows.
+
 Current build status
 ====================
 
 
 <table><tr>
-    <td>All platforms:</td>
+    <td>GitHub Actions</td>
     <td>
       <a href="https://github.com/conda-forge/ada-py-feedstock/actions/workflows/conda-build.yml">
         <img src="https://github.com/conda-forge/ada-py-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
@@ -62,6 +79,7 @@ Current release info
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-ada--py-green.svg)](https://anaconda.org/conda-forge/ada-py) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ada-py.svg)](https://anaconda.org/conda-forge/ada-py) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ada-py.svg)](https://anaconda.org/conda-forge/ada-py) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ada-py.svg)](https://anaconda.org/conda-forge/ada-py) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-ada--py--core-green.svg)](https://anaconda.org/conda-forge/ada-py-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ada-py-core.svg)](https://anaconda.org/conda-forge/ada-py-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ada-py-core.svg)](https://anaconda.org/conda-forge/ada-py-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ada-py-core.svg)](https://anaconda.org/conda-forge/ada-py-core) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-ada--py--desktop-green.svg)](https://anaconda.org/conda-forge/ada-py-desktop) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ada-py-desktop.svg)](https://anaconda.org/conda-forge/ada-py-desktop) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ada-py-desktop.svg)](https://anaconda.org/conda-forge/ada-py-desktop) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ada-py-desktop.svg)](https://anaconda.org/conda-forge/ada-py-desktop) |
 
 Installing ada-py
 =================
@@ -80,7 +98,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install ada-py ada-py-core
+conda install ada-py ada-py-core ada-py-desktop
 ```
 
 </details>
@@ -89,7 +107,7 @@ conda install ada-py ada-py-core
 <summary>With mamba</summary>
 
 ```
-mamba install ada-py ada-py-core
+mamba install ada-py ada-py-core ada-py-desktop
 ```
 
 </details>
@@ -99,9 +117,9 @@ mamba install ada-py ada-py-core
 
 ```
 # for adding to your local project
-pixi add ada-py ada-py-core
+pixi add ada-py ada-py-core ada-py-desktop
 # for installing globally
-pixi global install ada-py ada-py-core
+pixi global install ada-py ada-py-core ada-py-desktop
 ```
 
 </details>
