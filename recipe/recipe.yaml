@@ -10,8 +10,18 @@ recipe:
   version: ${{ version }}
 
 source:
-  url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
-  sha256: 91a5f1cc48e63cb5861c1c657286f69f9040e7d62ba2d5a287f0b0828a35d6ad
+  - url: https://github.com/Krande/adapy/archive/v${{ version }}.tar.gz
+    sha256: 91a5f1cc48e63cb5861c1c657286f69f9040e7d62ba2d5a287f0b0828a35d6ad
+  # The viewer bundle (ada/visit/rendering/resources/index.zip). adapy no longer commits it, so
+  # the tag tarball above has none: adapy's release workflow builds it from the tagged source and
+  # attaches it to the GitHub Release. `file_name` keeps it a file -- without it rattler-build
+  # unpacks the zip into the target directory, and the package would ship index.html instead.
+  - url: https://github.com/Krande/adapy/releases/download/v${{ version }}/ada-py-viewer-${{ version }}.zip
+    # Placeholder until the first adapy release that publishes the asset: its release workflow
+    # prints the sha256 in its step summary.
+    sha256: 0000000000000000000000000000000000000000000000000000000000000000
+    file_name: index.zip
+    target_directory: src/ada/visit/rendering/resources
 
 build:
   number: 0
@@ -36,6 +46,12 @@ outputs:
         - python ${{ python_min }}.*
       run:
         - python >=${{ python_min }}
+    tests:
+      # setuptools packages the bundle only if it is there; a source without it builds a package
+      # with no viewer and no error.
+      - package_contents:
+          site_packages:
+            - ada/visit/rendering/resources/index.zip
     about:
       description: |
         The core package without dependencies of ADAPY (ADA, Advanced Design & Analysis), a python library for structural analysis and design.
